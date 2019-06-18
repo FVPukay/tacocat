@@ -35,3 +35,9 @@ class Taco(Model):
 
     class Meta:
         database = DATABASE
+
+
+def initialize():
+    DATABASE.connect()
+    DATABASE.create_tables([User, Taco], safe=True)
+    DATABASE.close()
