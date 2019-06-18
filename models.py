@@ -21,3 +21,17 @@ class User(UserMixin, Model):
             )
         except IntegrityError:
             raise ValueError("User already exists")
+
+
+class Taco(Model):
+    user = ForeignKeyField(
+        rel_model=User,
+        related_name='tacos'
+    )
+    protein = CharField()
+    shell = CharField()
+    cheese = BooleanField()
+    extras = TextField(default='')
+
+    class Meta:
+        database = DATABASE
