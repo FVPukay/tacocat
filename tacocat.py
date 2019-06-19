@@ -1,4 +1,4 @@
-from flask import Flask, g
+from flask import Flask, g, render_template
 from flask_login import LoginManager, current_user
 
 import models
@@ -40,7 +40,8 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    return "This is the index URL"
+    tacos = models.Taco.select().limit(100)
+    return render_template('index.html', tacos=tacos)
 
 
 if __name__ == '__main__':
