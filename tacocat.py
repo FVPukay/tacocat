@@ -1,6 +1,7 @@
 from flask import Flask, g, render_template, url_for, flash, redirect
 from flask_bcrypt import check_password_hash
-from flask_login import LoginManager, current_user, login_user
+from flask_login import (LoginManager, current_user, login_user,
+                        login_required, logout_user)
 
 import forms
 import models
@@ -75,6 +76,14 @@ def login():
             else:
                 flash("You're email or password doesn't match!", "error")
     return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You've been logged out! Come back soon!", "success")
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
