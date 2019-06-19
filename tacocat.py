@@ -1,6 +1,7 @@
-from flask import Flask, g, render_template
+from flask import Flask, g, render_template, url_for, flash, redirect
 from flask_login import LoginManager, current_user
 
+import forms
 import models
 
 DEBUG = True
@@ -42,6 +43,19 @@ def after_request(response):
 def index():
     tacos = models.Taco.select().limit(100)
     return render_template('index.html', tacos=tacos)
+
+
+@app.route('/register', methods=('GET', 'POST'))
+def register():
+    form = forms.RegisterForm()
+    if form.validate_on_submit():
+        flash("You've registered successfully!", "success")
+        models.User.create_user(
+            email=form.email.data,
+            password=form.password.data
+        )
+        return redirect(url_for('index'))
+    return render_template('register.html', form=form)
 
 
 if __name__ == '__main__':
