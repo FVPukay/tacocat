@@ -1,5 +1,5 @@
 from flask import Flask, g
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 
 import models
 
