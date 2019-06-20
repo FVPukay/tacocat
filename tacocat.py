@@ -86,6 +86,23 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route('/taco', methods=('GET', 'POST'))
+@login_required
+def taco():
+    form = forms.TacoForm()
+    if form.validate_on_submit():
+        models.Taco.create(user=g.user._get_current_object(),
+                            protein=form.protein.data.strip(),
+                            shell=form.shell.data.strip(),
+                            cheese=form.cheese.data,
+                            extras=form.extras.data.strip()
+                            )
+
+        flash("Taco posted! Yum!", "success")
+        return redirect(url_for('index'))
+    return render_template('taco.html', form=form)
+
+
 if __name__ == '__main__':
     models.initialize()
     app.run(debug=DEBUG, host=HOST, port=PORT)

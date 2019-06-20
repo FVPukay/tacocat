@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from models import User
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import (DataRequired, ValidationError, Email,
                                 Length, EqualTo)
 
@@ -36,3 +36,10 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
+
+
+class TacoForm(FlaskForm):
+    protein = StringField('Protein', validators=[DataRequired()])
+    shell = StringField('Shell', validators=[DataRequired()])
+    cheese = BooleanField('Cheese')
+    extras = StringField('Extras')

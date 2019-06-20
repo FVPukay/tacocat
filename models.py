@@ -30,11 +30,23 @@ class Taco(Model):
     )
     protein = CharField()
     shell = CharField()
-    cheese = BooleanField()
+    cheese = BooleanField(default=False)
     extras = TextField(default='')
 
     class Meta:
         database = DATABASE
+
+
+class Relationship(Model):
+    from_user = ForeignKeyField(rel_model=User, related_name='relationships')
+    to_user = ForeignKeyField(rel_model=User, related_name='related_to')
+
+
+    class Meta:
+        database = DATABASE
+        indexes = (
+            (('from_user', 'to_user'), True),
+        )
 
 
 def initialize():
