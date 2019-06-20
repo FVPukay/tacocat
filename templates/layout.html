@@ -24,6 +24,15 @@
         <div class="u-full-width">
           <nav class="menu">
           <!-- menu goes here -->
+          {% if current_user.is_authenticated %}
+            <!-- add a new taco and log out buttons -->
+            <a href="{{ url_for('taco') }}">Add a new taco</a>
+            <a href="{{ url_for('logout') }}">Log Out</a>
+          {% else %}
+            <!-- sign up and log in buttons -->
+            <a href="{{ url_for('register') }}">Sign Up</a>
+            <a href="{{ url_for('login') }}">Log In</a>
+          {% endif %}
           </nav>
           {% block content %}{% endblock %}
         </div>
