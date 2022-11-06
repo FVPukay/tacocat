@@ -1,6 +1,6 @@
-# Tacocat Project
+# Tacocat
 * Users who have signed up can post the kinds of tacos that they have been eating!
-* This is a [Flask](https://flask.palletsprojects.com/en/2.2.x/) project
+* This app uses [Flask](https://flask.palletsprojects.com/en/2.2.x/)
 * The ORM is [Peewee](http://docs.peewee-orm.com/en/latest/#)
 
 I started with broken tests and made the tests pass to enable the functionality in the app
